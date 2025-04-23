@@ -1,4 +1,4 @@
-package com.resturant.business;
+package com.resturant;
 
 public class ReservationForm {
 

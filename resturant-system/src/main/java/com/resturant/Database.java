@@ -1,4 +1,4 @@
-package com.resturant.system;
+package com.resturant;
 
 import java.util.List;
 
