@@ -1,4 +1,4 @@
-package com.resturant;
+package com.restaurant;
 
 public class KitchenUI {
 
