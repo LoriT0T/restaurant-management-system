@@ -3,6 +3,7 @@ package com.restaurant;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class SystemController {
     // Attributes
     private int systemID;
@@ -355,15 +356,8 @@ public class SystemController {
         }
     }
 
-    // // Method 16 Update Payment Status - NEED CONFIRM OF WHAT IT DOES
-    // public boolean updatePaymentStatus (int orderID, String status){
-    //     if (!isLoggedIn) {
-    //         System.out.println("User must be logged in to update payment status");
-    //         return false;
-    //     }
-    }
 
-    // Method 17: Notify Waiter that order is ready
+    // Method 16: Notify Waiter that order is ready
     public boolean notifyWaiter(int orderId, int tableNumber) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to get order status");
@@ -377,7 +371,7 @@ public class SystemController {
         return sent;
     }
 
-    // Method 18: Check Stocks Levels in Inventory
+    // Method 17: Check Stocks Levels in Inventory
     public boolean checkStockLevels(String itemName) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to get check stock levels");
@@ -398,9 +392,32 @@ public class SystemController {
 
     } 
 
-    //Metho 19: Generate Purchase Orders - Need confirmation on how this works
+    //Method 18: Generate Purchase Orders
+    public boolean generatePurchaseOrder(String itemName, int quantity) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to generate purchase orders.");
+            return false;
+        }
 
-    // Method 20: Generate Sales Report
+        System.out.println("Generating purchase order for item: " + itemName + " (Quantity: " + quantity + ")");
+
+     
+        boolean orderValid = true; // In a real system, this would check inventory thresholds, supplier availability, etc.
+
+        if (!orderValid) {
+            System.out.println("Failed to generate purchase order: invalid order details.");
+            return false;
+        }
+
+        // In a real system, this would send the order to the SupplierSystem or database
+        System.out.println("Purchase order succesfully raised.");
+        return true;
+    }
+
+
+
+
+    // Method 19: Generate Sales Report
     public boolean generateSalesReport(String range) {
         if (!isLoggedIn) {
             System.out.println("Manager must be logged in to generate the sales reports");
@@ -429,7 +446,7 @@ public class SystemController {
         return true;
     }
 
-    // Method 21 Detect Outliers in sales
+    // Method 20 Detect Outliers in sales
     public void detectSalesOutliers(String range) {
         double revenue = calculateTotalRevenue(range);
         double expected = getExpectedRevenue(range);
@@ -445,7 +462,7 @@ public class SystemController {
         }
     }
 
-    // Method 22 Send Data to UI
+    // Method 21 Send Data to UI
         public boolean sendDataToUI(String uiType, Object data) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to send data to the UI");
@@ -458,9 +475,9 @@ public class SystemController {
         return sent;
     }
 
-    // Method 23 - fetchdate - Need to know what this does
+    // Method 22 - fetchdate - Need to know what this does
 
-    // Method 24: Update Schedule Record
+    // Method 23: Update Schedule Record
     public boolean updateScheduleRecord(Object record) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to update schedule records");
@@ -486,9 +503,9 @@ public class SystemController {
         }
     }
 
-    // Method 25 detectErrors - What does this do?
+    // Method 24 detectErrors - What does this do?
 
-    // Method 26 Handle Missing Data on Reports
+    // Method 25 Handle Missing Data on Reports
     public boolean handleMissingData(String reportType) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to view report data");
@@ -518,7 +535,7 @@ public class SystemController {
         }
     }
 
-    // Method 27: Apply Report Customisations
+    // Method 26: Apply Report Customisations
     public boolean updateCustomisations(Map<String, String> customisations) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to apply report customisations");
@@ -541,7 +558,7 @@ public class SystemController {
         }
     }
 
-    // Method 28: Update Roles and Permissions
+    // Method 27: Update Roles and Permissions
     public boolean updateRolesAndPermissions(String username, String newRole) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to update roles and permissions");
@@ -569,7 +586,7 @@ public class SystemController {
         }
     }
 
-    // Method 29: Retrieve Security Logs
+    // Method 28: Retrieve Security Logs
     public boolean retrieveLogs() {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to retrieve logs");
@@ -594,7 +611,7 @@ public class SystemController {
         }
     }
 
-    // Method 30 Handle Security Alerts
+    // Method 29 Handle Security Alerts
     public boolean handleSecurityAlerts() {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to handle security alerts");
@@ -624,7 +641,7 @@ public class SystemController {
         return true;
     }
     
-    // Method 31 Flag Suspicous Activity
+    // Method 30 Flag Suspicous Activity
     public boolean flagSuspiciousActivity(String username, String deviceInfo) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to perform security checks");
@@ -647,7 +664,7 @@ public class SystemController {
         return false;
     }
 
-    // Method 32 Deactivate Accounts
+    // Method 31 Deactivate Accounts
     public boolean deactivateAccount(String username) {
         if (!isLoggedIn) {
             System.out.println("User must be logged in to manage accounts.");
@@ -860,14 +877,14 @@ public class SystemController {
         return isLoggedIn; 
     }
 
-    //Helper for Method 17 Waiter Notification or Order being ready
+    //Helper for Method 16 Waiter Notification or Order being ready
     private boolean sendNotificationToWaiter(int tableNumber, String message) {
-        System.out.println("Sending to waiter@table" + tableNumber + ": " + message);
+        System.out.println("Sending to Waiter for table" + tableNumber + ": " + message);
 
         return true; 
     }
 
-    //Helper for Method 18 Check Stocks Levels in Inventory
+    //Helper for Method 17 Check Stocks Levels in Inventory
 
     // Mock Stock Levels
     private int getStockLevelForItem(String itemName) {
@@ -891,7 +908,7 @@ public class SystemController {
         return reorderThresholds.getOrDefault(itemName, 5);
     }
 
-    // Helper Method for 20 Get Sales Report
+    // Helper Method for 19 Get Sales Report
 
     // Total Revenue Simulation
     private double calculateTotalRevenue(String range) {
@@ -923,7 +940,7 @@ public class SystemController {
         }
     }
 
-    // Helper for Method 21 - Get Outliers for Sales Report
+    // Helper for Method 20 - Get Outliers for Sales Report
     // Expected Revenue Numbers
     private double getExpectedRevenue(String range) {
         switch (range.toLowerCase()) {
@@ -934,7 +951,7 @@ public class SystemController {
         }
     }
 
-    // Helper for Method 22: Send  Data Based on UI Type
+    // Helper for Method 21: Send  Data Based on UI Type
     private boolean dispatchToUI(String uiType, Object data) {
         switch (uiType.toLowerCase()) {
             case "securityui":
@@ -965,14 +982,14 @@ public class SystemController {
         return true;
     }
 
-    // Helper for Method 24 Update Schedule Record
+    // Helper for Method 23 Update Schedule Record
     private boolean processScheduleUpdate(Object record) {
         // Simulated update logic — this would normally interact with a database or file
         System.out.println("Updating schedule with data: " + record);
         return true; 
     }
 
-    // Method 26 Handle Missing Data on Reports
+    // Method 25 Handle Missing Data on Reports
 
     // Randomly simulate missing or complete data
     private boolean validateReportData(String reportType) {
@@ -995,7 +1012,7 @@ public class SystemController {
         return corrected;
     }
 
-    //Helper for Method 27 Customising report
+    //Helper for Method 26 Customising report
 
     // Simulate applying custom filters, views, or formats
     private boolean applyCustomisationSettings(Map<String, String> customisations) {
@@ -1012,7 +1029,7 @@ public class SystemController {
 
     // system.updateCustomisations(filters); // example usage
 
-    // Helper for Method 28: Actually update the role
+    // Helper for Method 27: Actually update the role
     private boolean applyRoleUpdate(String username, String newRole) {
         if (userRoles == null) {
             userRoles = new HashMap<>();
@@ -1022,7 +1039,7 @@ public class SystemController {
         return true;
     }
 
-    // Helper for Method 29 Retrieve Security Logs
+    // Helper for Method 28 Retrieve Security Logs
     private String fetchSecurityLogs() {
         // Simulate fetching from a database or log file
         StringBuilder logs = new StringBuilder();
@@ -1033,7 +1050,7 @@ public class SystemController {
         return logs.toString();
     }
 
-    // Helper for Method 30 Handle Security Alerts
+    // Helper for Method 29 Handle Security Alerts
     private String[] getSecurityAlerts() {
         // Simulated active alerts
         return new String[]{
@@ -1054,7 +1071,7 @@ public class SystemController {
         System.out.println("All alerts logged and flagged for follow-up.\n");
     }
 
-    // Helper for Method 31 Flag Suspicious Activity
+    // Helper for Method 30 Flag Suspicious Activity
     private boolean isRecognisedDevice(String username, String deviceInfo) {
         // Mocked list of known devices for demo
         Map<String, String[]> trustedDevices = new HashMap<>();
@@ -1083,7 +1100,7 @@ public class SystemController {
         // In a real system, this could send an email or push notification
     }
 
-    // Helper for Method 32 Deactivate Account
+    // Helper for Method 31 Deactivate Account
     private void logAccountDeactivation(String username) {
         System.out.println("Security Log: '" + username + "' account deactivated by administrator.");
         // Logs in Security Log for testing

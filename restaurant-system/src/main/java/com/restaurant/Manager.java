@@ -42,7 +42,7 @@ public class Manager {
     }
 
     // Method stubs
-    public void viewSalesReport(String format) {
+    public void generateSalesReport(String format) {
         // Implementation to be added
     }
 
