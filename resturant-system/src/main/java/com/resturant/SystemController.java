@@ -347,6 +347,94 @@ public class SystemController {
             return false;
         }
     }
+
+    // // Method 16 Update Payment Status - NEED CONFIRM OF WHAT IT DOES
+    // public boolean updatePaymentStatus (int orderID, String status){
+    //     if (!isLoggedIn) {
+    //         System.out.println("User must be logged in to update payment status");
+    //         return false;
+    //     }
+    }
+
+    // Method 17: Notify Waiter that order is ready
+    public boolean notifyWaiter(int orderId, int tableNumber) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to get order status");
+            return false;
+        }
+
+        String message = "Order Number " + orderId + " is ready for Table " + tableNumber + ".";
+        System.out.println("Notifying waiter: " + message);
+
+        boolean sent = sendNotificationToWaiter(tableNumber, message);
+        return sent;
+    }
+
+    // Method 18: Check Stocks Levels in Inventory
+    public boolean checkStockLevels(String itemName) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to get check stock levels");
+            return false;
+        }
+        
+        System.out.println("Checking Stock for item:" + itemName);
+
+        int stockCount = getStockLevelForItem(itemName);
+        
+        if (stockCount < getReorderAmount(itemName)) {
+            System.out.println("Stock for " + itemName +" is Low." + stockCount + " units remaining.");
+            return false;
+        } else {
+            System.out.println("Stock for " + itemName +" is OK." + stockCount + " units remaining.");
+            return true;
+        } 
+
+    } 
+
+    //Metho 19: Generate Purchase Orders - Need confirmation on how this works
+
+    // Method 20: Generate Sales Report
+    public boolean generateSalesReport(String range) {
+        if (!isLoggedIn) {
+            System.out.println("Manager must be logged in to generate the sales reports");
+            return false;
+        }
+
+        System.out.println("Generating " + range.toUpperCase() + " Sales Report...");
+
+        double totalRevenue = calculateTotalRevenue(range);
+        int customerCount = calculateCustomerCount(range);
+        String bestSeller = getBestSellingItem(range);
+
+        System.out.println("\n--- " + range.toUpperCase() + " SALES REPORT ---");
+        System.out.println("Total Revenue: £" + totalRevenue);
+        System.out.println("Total Customers: " + customerCount);
+        System.out.println("Best Selling Item: " + bestSeller);
+        System.out.println("------------------------------\n");
+
+        detectSalesOutliers(range); //To Connect to Method 21 for outliers
+
+        return true;
+    }
+
+    // Method 21 Detect Outliers in sales
+    public void detectSalesOutliers(String range) {
+        double revenue = calculateTotalRevenue(range);
+        double expected = getExpectedRevenue(range);
+
+        if (revenue > expected * 1.5) {
+            System.out.println("ALERT: Unusual spike in sales detected!");
+            System.out.println("Possible reason: Promotion, seasonal event, or bulk order.");
+        } else if (revenue < expected * 0.5) {
+            System.out.println("ALERT: Unusual drop in sales detected!");
+            System.out.println("Possible reason: System error, bad weather, or closure.");
+        } else {
+            System.out.println("Sales levels for " + range + " are within expected range.");
+        }
+    }
+
+
+
     
     // Helper methods
 
@@ -526,4 +614,83 @@ public class SystemController {
     public boolean isLoggedIn() { 
         return isLoggedIn; 
     }
-}
+
+    //Helper for Method 17 Waiter Notification or Order being ready
+    private boolean sendNotificationToWaiter(int tableNumber, String message) {
+        System.out.println("Sending to waiter@table" + tableNumber + ": " + message);
+
+        return true; 
+    }
+
+    //Helper for Method 18 Check Stocks Levels in Inventory
+
+    // Mock Stock Levels
+    private int getStockLevelForItem(String itemName) {
+        Map<String, Integer> mockStock = new HashMap<>();
+        mockStock.put("Steak", 12);
+        mockStock.put("Chips", 3);
+        mockStock.put("Pizza Bases", 25);
+        mockStock.put("Salad Leaves", 0);
+    
+        return mockStock.getOrDefault(itemName, 0);
+    }
+
+    //Reorder Values for Par Stock
+    private int getReorderAmount(String itemName) {  
+        Map<String, Integer> reorderThresholds = new HashMap<>();
+        reorderThresholds.put("Steak", 10);
+        reorderThresholds.put("Chips", 5);
+        reorderThresholds.put("Pizza Bases", 15);
+        reorderThresholds.put("Salad Leaves", 5);
+    
+        return reorderThresholds.getOrDefault(itemName, 5);
+    }
+
+    // Helper Method for 20 Get Sales Report
+
+    // Total Revenue Simulation
+    private double calculateTotalRevenue(String range) {
+        switch (range.toLowerCase()) {
+            case "daily": return 425.75;
+            case "weekly": return 2875.40;
+            case "monthly": return 11345.90;
+            default: return 0.0;
+        }
+    }
+
+    // Customer Numbers Simulation
+    private int calculateCustomerCount(String range) {
+        switch (range.toLowerCase()) {
+            case "daily": return 48;
+            case "weekly": return 312;
+            case "monthly": return 1280;
+            default: return 0;
+        }
+    }
+
+    // Top Seller Simulation    
+    private String getBestSellingItem(String range) {
+        switch (range.toLowerCase()) {
+            case "daily": return "Cheeseburger";
+            case "weekly": return "Margherita Pizza";
+            case "monthly": return "Fish and Chips";
+            default: return "N/A";
+        }
+    }
+
+    // Helper for Method 21 - Get Outliers for Sales Report
+    // Expected Revenue Numbers
+    private double getExpectedRevenue(String range) {
+        switch (range.toLowerCase()) {
+            case "daily": return 500;
+            case "weekly": return 3500;
+            case "monthly": return 14000;
+            default: return 0;
+        }
+    }
+    
+    
+    
+    
+    
+}  
