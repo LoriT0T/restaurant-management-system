@@ -1,4 +1,4 @@
-package com.resturant;
+package com.restaurant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +11,7 @@ public class SystemController {
     
     // User authentication storage
     private Map<String, String> userCredentials;
+    private Map<String, String> userRoles;
     private String currentUser;
     private boolean isLoggedIn;
     
@@ -20,12 +21,18 @@ public class SystemController {
         this.systemStatus = "Active";
         this.missingDataStatus = false;
         this.userCredentials = new HashMap<>();
+        this.userRoles = new HashMap<>();
         this.isLoggedIn = false;
         
         // Add some default users for testing
         userCredentials.put("admin", "admin123");
         userCredentials.put("waiter", "waiter123");
         userCredentials.put("chef", "chef123");
+
+        // Default User Roles
+        userRoles.put("admin", "manager");
+        userRoles.put("waiter", "staff");
+        userRoles.put("chef", "staff");
     }
     
     private int generateSystemID() {
@@ -400,6 +407,11 @@ public class SystemController {
             return false;
         }
 
+        if (!handleMissingData("sales")) { // Checks data against Method 26 Missing Data
+            return false;
+        }
+        
+
         System.out.println("Generating " + range.toUpperCase() + " Sales Report...");
 
         double totalRevenue = calculateTotalRevenue(range);
@@ -432,6 +444,239 @@ public class SystemController {
             System.out.println("Sales levels for " + range + " are within expected range.");
         }
     }
+
+    // Method 22 Send Data to UI
+        public boolean sendDataToUI(String uiType, Object data) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to send data to the UI");
+            return false;
+        }
+
+        System.out.println("Sending data to " + uiType + "...");
+
+        boolean sent = dispatchToUI(uiType, data);
+        return sent;
+    }
+
+    // Method 23 - fetchdate - Need to know what this does
+
+    // Method 24: Update Schedule Record
+    public boolean updateScheduleRecord(Object record) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to update schedule records");
+            return false;
+        }
+
+        if (!"manager".equals(userRoles.get(currentUser))) {
+            System.out.println("Only managers can update schedules");
+            return false;
+        }
+        
+
+        System.out.println("Attempting to update schedule record...");
+
+        boolean updated = processScheduleUpdate(record);
+
+        if (updated) {
+            System.out.println("Schedule updated successfully.");
+            return true;
+        } else {
+            System.out.println("Failed to update schedule.");
+            return false;
+        }
+    }
+
+    // Method 25 detectErrors - What does this do?
+
+    // Method 26 Handle Missing Data on Reports
+    public boolean handleMissingData(String reportType) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to view report data");
+            return false;
+        }
+
+        System.out.println("Checking for missing or incomplete data for " + reportType + " report...");
+
+        boolean dataIsComplete = validateReportData(reportType);
+
+        if (dataIsComplete) {
+            System.out.println("All data is available and complete. Proceeding with " + reportType + " report.");
+            return true;
+        } else {
+            System.out.println("Missing or incomplete data detected for " + reportType + " report.");
+
+            // get user to correct data
+            boolean corrected = promptUserToCorrectData(reportType);
+
+            if (corrected) {
+                System.out.println("Missing data corrected. Proceeding with " + reportType + " report.");
+                return true;
+            } else {
+                System.out.println("Report generation failed: missing data could not be resolved.");
+                return false;
+            }
+        }
+    }
+
+    // Method 27: Apply Report Customisations
+    public boolean updateCustomisations(Map<String, String> customisations) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to apply report customisations");
+            return false;
+        }
+
+        System.out.println("Applying report customisations...");
+
+        boolean applied = applyCustomisationSettings(customisations);
+
+        if (applied) {
+            System.out.println("Customisations applied successfully:");
+            for (String key : customisations.keySet()) {
+                System.out.println(" - " + key + ": " + customisations.get(key));
+            }
+            return true;
+        } else {
+            System.out.println("Failed to apply customisations");
+            return false;
+        }
+    }
+
+    // Method 28: Update Roles and Permissions
+    public boolean updateRolesAndPermissions(String username, String newRole) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to update roles and permissions");
+            return false;
+        }
+
+        if (!currentUser.equals("admin")) {
+            System.out.println("Only administrators can update user roles and permissions");
+            return false;
+        }
+
+        if (!userCredentials.containsKey(username)) {
+            System.out.println("User not found: " + username);
+            return false;
+        }
+
+        boolean updated = applyRoleUpdate(username, newRole);
+
+        if (updated) {
+            System.out.println("Updated role for user '" + username + "' to '" + newRole + "'");
+            return true;
+        } else {
+            System.out.println("Failed to update role for user '" + username + "'");
+            return false;
+        }
+    }
+
+    // Method 29: Retrieve Security Logs
+    public boolean retrieveLogs() {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to retrieve logs");
+            return false;
+        }
+    
+        if (!"manager".equals(userRoles.get(currentUser))) {
+            System.out.println("Only administrators can retrieve security logs");
+            return false;
+        }
+    
+        System.out.println("Retrieving security logs...");
+    
+        String logs = fetchSecurityLogs();
+    
+        if (logs != null && !logs.isEmpty()) {
+            System.out.println("Security Logs:\n" + logs);
+            return true;
+        } else {
+            System.out.println("No logs found or error retrieving logs.");
+            return false;
+        }
+    }
+
+    // Method 30 Handle Security Alerts
+    public boolean handleSecurityAlerts() {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to handle security alerts");
+            return false;
+        }
+    
+        if (!"manager".equals(userRoles.get(currentUser))) {
+            System.out.println("Only administrators can manage security alerts");
+            return false;
+        }
+    
+        System.out.println("Retrieving security alerts...");
+    
+        String[] alerts = getSecurityAlerts();
+    
+        if (alerts.length == 0) {
+            System.out.println("No current security alerts.");
+            return true;
+        }
+    
+        System.out.println("SECURITY ALERTS:");
+        for (String alert : alerts) {
+            System.out.println(" - " + alert);
+        }
+    
+        respondToAlerts(alerts);  
+        return true;
+    }
+    
+    // Method 31 Flag Suspicous Activity
+    public boolean flagSuspiciousActivity(String username, String deviceInfo) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to perform security checks");
+            return false;
+        }
+    
+        if (!userCredentials.containsKey(username)) {
+            System.out.println("Unknown user attempted login: " + username);
+            return false;
+        }
+    
+        if (!isRecognisedDevice(username, deviceInfo)) {
+            System.out.println("Suspicious activity detected: Unrecognised device for user '" + username + "'");
+            logSuspiciousLogin(username, deviceInfo);
+            alertAdministrator(username, deviceInfo);
+            return true;
+        }
+    
+        System.out.println("Device recognised for user '" + username + "'. Login allowed.");
+        return false;
+    }
+
+    // Method 32 Deactivate Accounts
+    public boolean deactivateAccount(String username) {
+        if (!isLoggedIn) {
+            System.out.println("User must be logged in to manage accounts.");
+            return false;
+        }
+    
+        if (!currentUser.equals("admin")) {
+            System.out.println("Only administrators can deactivate accounts.");
+            return false;
+        }
+    
+        if (!userCredentials.containsKey(username)) {
+            System.out.println("Cannot deactivate. User '" + username + "' does not exist.");
+            return false;
+        }
+    
+        userCredentials.remove(username);
+        userRoles.remove(username);
+        System.out.println("Account for user '" + username + "' has been deactivated.");
+        
+        logAccountDeactivation(username);
+        return true;
+    }
+    
+    
+
+
+
+
 
 
 
@@ -688,9 +933,167 @@ public class SystemController {
             default: return 0;
         }
     }
+
+    // Helper for Method 22: Send  Data Based on UI Type
+    private boolean dispatchToUI(String uiType, Object data) {
+        switch (uiType.toLowerCase()) {
+            case "securityui":
+                System.out.println("[Security UI] Security Alert: " + data);
+                break;
+            case "inventoryui":
+                System.out.println("[Inventory UI] Stock Update: " + data);
+                break;
+            case "scheduleui":
+                System.out.println("[Schedule UI] Staff Rota: " + data);
+                break;
+            case "salesui":
+                System.out.println("[Sales UI] Report: " + data);
+                break;
+            case "kitchenui":
+                System.out.println("[Kitchen UI] New Order Placed: " + data);
+                break;
+            case "orderui":
+                System.out.println("[Order UI] Order Summary: " + data);
+                break;
+            case "paymentui":
+                System.out.println("[Payment UI] Payment Confirmation: " + data);
+                break;
+            default:
+                System.out.println("Unknown UI type: " + uiType);
+                return false;
+        }
+        return true;
+    }
+
+    // Helper for Method 24 Update Schedule Record
+    private boolean processScheduleUpdate(Object record) {
+        // Simulated update logic — this would normally interact with a database or file
+        System.out.println("Updating schedule with data: " + record);
+        return true; 
+    }
+
+    // Method 26 Handle Missing Data on Reports
+
+    // Randomly simulate missing or complete data
+    private boolean validateReportData(String reportType) {
+        return Math.random() > 0.3; // 70% chance data is okay for testing purposes 
+    }
+
+    // Simulate user prompt to correct data
+    private boolean promptUserToCorrectData(String reportType) {
+        System.out.println("Prompting user to correct missing data for: " + reportType);
+
+        // Simulate user correcting the data ( Random 50% chance for testing)
+        boolean corrected = Math.random() > 0.5;
+
+        if (corrected) {
+            System.out.println("User corrected the data.");
+        } else {
+            System.out.println("User failed to correct the data.");
+        }
+
+        return corrected;
+    }
+
+    //Helper for Method 27 Customising report
+
+    // Simulate applying custom filters, views, or formats
+    private boolean applyCustomisationSettings(Map<String, String> customisations) {
+        // In a real system, this would update the report config context
+        return true;
+    }
+
+    // Testing Data that can be used during testing process
+
+    // Map<String, String> filters = new HashMap<>();
+    // filters.put("Date Range", "2025-04-01 to 2025-04-07");
+    // filters.put("Format", "PDF");
+    // filters.put("Department", "Kitchen");
+
+    // system.updateCustomisations(filters); // example usage
+
+    // Helper for Method 28: Actually update the role
+    private boolean applyRoleUpdate(String username, String newRole) {
+        if (userRoles == null) {
+            userRoles = new HashMap<>();
+        }
+        
+        userRoles.put(username, newRole.toLowerCase());
+        return true;
+    }
+
+    // Helper for Method 29 Retrieve Security Logs
+    private String fetchSecurityLogs() {
+        // Simulate fetching from a database or log file
+        StringBuilder logs = new StringBuilder();
+        logs.append("Log [2025-04-24 10:45] - User admin logged in\n");
+        logs.append("Log [2025-04-24 11:12] - User waiter failed login attempt\n");
+        logs.append("Log [2025-04-24 13:30] - Role update performed by admin\n");
+        logs.append("Log [2025-04-24 14:00] - Unauthorized access attempt blocked\n");
+        return logs.toString();
+    }
+
+    // Helper for Method 30 Handle Security Alerts
+    private String[] getSecurityAlerts() {
+        // Simulated active alerts
+        return new String[]{
+            "Multiple failed login attempts detected for user 'waiter'",
+            "Suspicious access attempt to manager functions",
+            "Unauthorized data modification blocked"
+        };
+    }
+    
+    private void respondToAlerts(String[] alerts) {
+        System.out.println("\nResponding to alerts...");
+    
+        for (String alert : alerts) {
+            System.out.println(" - Logged alert: \"" + alert + "\"");
+            // Simulated response actions (e.g., notify IT, lock account, create incident report)
+        }
+    
+        System.out.println("All alerts logged and flagged for follow-up.\n");
+    }
+
+    // Helper for Method 31 Flag Suspicious Activity
+    private boolean isRecognisedDevice(String username, String deviceInfo) {
+        // Mocked list of known devices for demo
+        Map<String, String[]> trustedDevices = new HashMap<>();
+        trustedDevices.put("admin", new String[]{"AdminPC01", "SecureTablet"});
+        trustedDevices.put("waiter", new String[]{"WaiterTablet01"});
+        trustedDevices.put("chef", new String[]{"KitchenStation01"});
+    
+        String[] knownDevices = trustedDevices.getOrDefault(username, new String[0]);
+        for (String device : knownDevices) {
+            if (device.equalsIgnoreCase(deviceInfo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void logSuspiciousLogin(String username, String deviceInfo) {
+        System.out.println("Logging suspicious login attempt by '" + username + "' from device: " + deviceInfo);
+        // In a real system, this would insert into a security log table or file
+    }
+    
+    private void alertAdministrator(String username, String deviceInfo) {
+        System.out.println("ALERT: Administrator notified of suspicious login attempt.");
+        System.out.println("User: " + username);
+        System.out.println("Device: " + deviceInfo);
+        // In a real system, this could send an email or push notification
+    }
+
+    // Helper for Method 32 Deactivate Account
+    private void logAccountDeactivation(String username) {
+        System.out.println("Security Log: '" + username + "' account deactivated by administrator.");
+        // Logs in Security Log for testing
+    }
     
     
     
+    
+
+ 
     
     
 }  
