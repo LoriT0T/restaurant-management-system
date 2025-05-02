@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create New Order</title>
+  <link rel="stylesheet" href="../css/createorder.css">
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <a href="reservationdashboard.html">Reservations</a>
+    <a href="reservationdashboard.html">Tables</a>
+    <a href="orders.html">Orders</a>
+    <a href="kitchen.html">Kitchen</a>
+  </nav>
+  <a href="#" class="help">Help</a>
+</header>
+
+<div class="container">
+  <h2>Create New Order</h2>
+
+  <div class="form-group">
+      <label for="orderType"></label><select id="orderType">
+      <option value="">Select order type</option>
+      <option value="Dine In">Dine In</option>
+      <option value="Takeout">Takeout</option>
+      <option value="Delivery">Delivery</option>
+    </select>
+      <label for="tableNumber"></label><select id="tableNumber">
+      <option value="">Select table</option>
+      <option value="1">Table 1</option>
+      <option value="2">Table 2</option>
+      <option value="3">Table 3</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+      <label for="customerName"></label><input type="text" placeholder="Enter customer name" id="customerName">
+      <label for="phoneNumber"></label><input type="text" placeholder="Enter phone number" id="phoneNumber">
+  </div>
+
+  <div class="menu-section">
+    <div class="menu-filters">
+        <label for="searchItem"></label><input type="text" placeholder="Search menu items" id="searchItem">
+        <label for="filterCategory"></label><select id="filterCategory">
+        <option value="">Filter by category</option>
+        <option value="Appetizers">Appetizers</option>
+        <option value="Main Course">Main Course</option>
+        <option value="Desserts">Desserts</option>
+        <option value="Beverages">Beverages</option>
+      </select>
+    </div>
+
+    <div class="menu-items" id="menuItems">
+      <div class="menu-item" onclick="addItem('Margherita Pizza', 12.99)">Margherita Pizza - $12.99</div>
+      <div class="menu-item" onclick="addItem('Caesar Salad', 8.50)">Caesar Salad - $8.50</div>
+      <div class="menu-item" onclick="addItem('Spaghetti Carbonara', 14.75)">Spaghetti Carbonara - $14.75</div>
+      <div class="menu-item" onclick="addItem('Grilled Salmon', 18.99)">Grilled Salmon - $18.99</div>
+      <div class="menu-item" onclick="addItem('Chocolate Cake', 6.50)">Chocolate Cake - $6.50</div>
+    </div>
+  </div>
+
+  <div class="order-summary">
+    <h3>Order Summary</h3>
+    <table id="orderTable">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="subtotal">Subtotal: $<span id="subtotal">0.00</span></div>
+    <div class="tax">Tax (8%): $<span id="tax">0.00</span></div>
+    <div class="total">Total: $<span id="total">0.00</span></div>
+  </div>
+
+  <div class="special-instructions">
+      <label>
+          <textarea placeholder="Add any special instructions or notes"></textarea>
+      </label>
+  </div>
+
+  <div class="actions">
+    <button class="cancel-btn">Cancel</button>
+    <button class="save-btn">Save as Draft</button>
+    <button class="place-btn">Place Order</button>
+  </div>
+</div>
+
+<script src="../js/createorder.js"></script>
+<script src="../js/access.js"></script>
+</body>
+</html>

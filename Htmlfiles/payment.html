@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Calculation</title>
+  <link rel="stylesheet" href="../css/payment.css">
+</head>
+<body>
+  <header>
+    <nav class="top-nav">
+     <ul>
+  <li><a href="reservationdashboard.html">Reservations</a></li>
+  <li><a href="tables.html">Tables</a></li>
+  <li><a href="orders.html">Orders</a></li>
+  <li><a href="kitchen.html">Kitchen</a></li>
+  <li><a href="payment.html">Payments</a></li>
+  <li><a href="inventory.html">Inventory</a></li>
+     </ul>
+
+      <div class="top-actions">
+        <button class="add-new">Add New</button>
+        <div class="profile-pic"></div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Additional Options</h2>
+    <div class="breadcrumb">
+      <span>Payments</span> &gt; <span>Bill Calculation</span>
+    </div>
+
+    <div class="tabs">
+      <button class="active-tab">Bill Calculation</button>
+      <button>Payment Methods</button>
+      <button>Split Payment</button>
+      <button>Receipt</button>
+    </div>
+
+    <section class="bill-summary">
+      <h3>Order Summary</h3>
+      <p>Table #12 – Party of 4</p>
+
+      <table class="order-table">
+        <tr>
+          <td>Grilled Salmon</td><td>1</td><td>$24.99</td>
+        </tr>
+        <tr>
+          <td>Caesar Salad</td><td>2</td><td>$18.98</td>
+        </tr>
+        <tr>
+          <td>Rib-eye Steak</td><td>1</td><td>$32.99</td>
+        </tr>
+        <tr>
+          <td>House Wine</td><td>2</td><td>$19.98</td>
+        </tr>
+        <tr>
+          <td>Chocolate Cake</td><td>1</td><td>$8.99</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="bill-details">
+      <h3>Bill Details</h3>
+      <ul class="details-list">
+        <li>Subtotal: <span id="subtotal">$105.93</span></li>
+        <li>Tax (8.25%): <span id="tax">$8.74</span></li>
+        <li>Service Charge (18%): <span id="service">$19.07</span></li>
+        <li>Discount: <span id="discount">- $5.00</span></li>
+        <li><strong>Total Amount:</strong> <strong id="total">$128.74</strong></li>
+      </ul>
+
+      <div class="coupon-section">
+        <label>Apply Coupon</label>
+        <input type="text" id="coupon-code" placeholder="Enter coupon code">
+        <button onclick="applyCoupon()">Apply</button>
+      </div>
+
+      <div class="note-section">
+        <label>Add Note</label>
+        <textarea placeholder="Add special instructions or notes"></textarea>
+      </div>
+
+      <div class="action-buttons">
+        <button class="edit-order">Edit Order</button>
+        <button class="proceed-payment">Proceed to Payment</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/payment.js"></script>
+  <script src="../js/access.js"></script>
+</body>
+</html>

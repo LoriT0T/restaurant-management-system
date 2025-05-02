@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inventory Dashboard</title>
+  <link rel="stylesheet" href="../css/inventory.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-left">
+      <nav>
+        <a href="reservationdashboard.html">Reservations</a>
+        <a href="reservationdashboard.html">Tables</a>
+        <a href="orders.html">Orders</a>
+        <a href="kitchen.html">Kitchen</a>
+        <a href="payment.html">Payments</a>
+        <a href="inventory.html">Inventory</a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <button class="add-item">Add Item</button>
+      <img src="profile.jpg" alt="Profile" class="profile-icon"/>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumbs">Inventory &gt; <strong>Stock Management</strong></div>
+
+    <div class="tabs">
+      <a class="active">Stock Management</a>
+      <a>Orders</a>
+      <a>Suppliers</a>
+      <a>Reports</a>
+    </div>
+
+    <section class="overview">
+      <div class="card">
+        <h3>Total Items</h3>
+        <p>248 Items</p>
+      </div>
+      <div class="card">
+        <h3>Low Stock</h3>
+        <p>12 Items</p>
+        <button>View</button>
+      </div>
+      <div class="card">
+        <h3>Pending Orders</h3>
+        <p>5 Orders</p>
+      </div>
+    </section>
+
+    <div class="inventory-controls">
+      <input type="text" placeholder="Search inventory..." />
+      <div class="buttons">
+        <button>Filter</button>
+        <button>Export</button>
+      </div>
+    </div>
+
+    <table class="inventory-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>🐟 Salmon Fillet</td><td>15 kg</td><td>$22.99/kg</td><td>In Stock</td></tr>
+        <tr><td>🥩 Ribeye Steak</td><td>8 kg</td><td>$28.50/kg</td><td class="low">Low Stock ⚠️</td></tr>
+        <tr><td>🍷 House Wine</td><td>24 bottles</td><td>$12.99/bottle</td><td>In Stock</td></tr>
+        <tr><td>🫒 Olive Oil</td><td>5 bottles</td><td>$18.75/bottle</td><td class="low">Low Stock ⚠️</td></tr>
+        <tr><td>🌾 Flour</td><td>25 kg</td><td>$1.99/kg</td><td>In Stock</td></tr>
+        <tr><td>🥚 Eggs</td><td>10 dozen</td><td>$3.50/dozen</td><td>In Stock</td></tr>
+      </tbody>
+    </table>
+
+    <section class="activity">
+      <h3>Recent Activity</h3>
+      <ul>
+        <li><strong>Order Received</strong> - Produce delivery - 10 minutes ago</li>
+        <li><strong>Low Stock Alert</strong> - Ribeye Steak - 1 hour ago</li>
+        <li><strong>Order Placed</strong> - Seafood order - 3 hours ago</li>
+        <li><strong>Inventory Count</strong> - Weekly count completed - Yesterday</li>
+      </ul>
+      <div class="report-buttons">
+        <button>Generate Report</button>
+        <button class="primary">Place Order</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/inventory.js"></script>
+  <script src="../js/access.js"></script>
+</body>
+</html>

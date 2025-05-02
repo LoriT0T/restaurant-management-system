@@ -1,0 +1,145 @@
+﻿body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9fb;
+  color: #333;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar a {
+  margin-right: 1.5rem;
+  text-decoration: none;
+  color: #666;
+}
+
+.navbar a.active {
+  font-weight: bold;
+  color: #333;
+}
+
+.help-btn {
+  background: #715bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-right: 1rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  background: gray;
+  border-radius: 50%;
+}
+
+.breadcrumbs {
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.dashboard {
+  padding: 2rem;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.tab.active {
+  border-bottom: 2px solid #715bff;
+  font-weight: bold;
+}
+
+.refresh {
+  margin-left: auto;
+  background: #f0f0ff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.orders {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.order-card {
+  background: #f0f0ff;
+  padding: 1rem;
+  border-radius: 12px;
+  width: 200px;
+}
+
+.order-card h3 {
+  margin-top: 0;
+}
+
+.order-card button {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+
+.order-card .start-btn {
+  background: #715bff;
+  color: white;
+}
+
+.order-card .view-btn {
+  background: #e0e0ff;
+}
+
+.order-items table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  margin-bottom: 2rem;
+}
+
+.order-items th, .order-items td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.stats {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.stat {
+  background: #f5f5ff;
+  padding: 1rem;
+  border-radius: 12px;
+  flex: 1;
+  text-align: center;
+}
+
+.stat p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

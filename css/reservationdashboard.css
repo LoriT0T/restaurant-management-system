@@ -1,0 +1,177 @@
+﻿body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  margin: 0;
+  color: #222;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar nav span {
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.help-btn {
+  background-color: #7b61ff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.account-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  display: none;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+  border-radius: 6px;
+}
+
+.dropdown-menu a {
+  padding: 8px;
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-menu a:hover {
+  background: #f0f0f0;
+}
+
+.dropdown-menu.show {
+  display: flex;
+}
+
+.container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-btn {
+  background-color: #7b61ff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin: 20px 0;
+}
+
+.tab {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #e8e4ff;
+  border-color: #7b61ff;
+}
+
+.search-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.search-row input[type="text"],
+.search-row input[type="date"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 48%;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.load-more {
+  text-align: center;
+  margin-top: 30px;
+}
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem; /*adding media queries for phone users*/
+  }
+
+  .navbar nav span {
+    display: none; /* hide nav items or convert to hamburger */
+  }
+
+  .search-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-row input {
+    width: 100%;
+  }
+
+  .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  td {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reservations</title>
+  <link rel="stylesheet" href="../css/reservationdashboard.css">
+</head>
+<body>
+  <header class="navbar">
+<nav>
+  <a href="reservationdashboard.html">Reservations</a>
+  <a href="reservationdashboard.html">Tables</a>
+  <a href="orders.html">Orders</a>
+  <a href="kitchen.html">Kitchen</a>
+</nav>
+
+    <div class="right-nav">
+      <button class="help-btn">Help</button>
+      <div class="account-dropdown">
+        <button id="accountBtn">👤</button>
+        <div id="accountMenu" class="dropdown-menu hidden">
+          <a href="reservationdashboard.html">Home</a>
+          <a href="login.html" id="logoutBtn">Log Out</a>
+          <a href="login.html" id="deleteAccountBtn">Delete Account</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="header-row">
+      <h1>Reservations</h1>
+      <button class="new-btn">New Reservation</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active">Today</button>
+      <button class="tab">Upcoming</button>
+      <button class="tab">Past</button>
+      <button class="tab">All</button>
+    </div>
+
+    <div class="search-row">
+      <input type="text" placeholder="Search reservations">
+      <input type="date" value="2023-05-12">
+    </div>
+
+    <section>
+      <h2>Today's Reservations</h2>
+      <table>
+        <tbody id="todayReservations"></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Upcoming Reservations</h2>
+      <table>
+        <tbody id="upcomingReservations"></tbody>
+      </table>
+    </section>
+
+    <div class="load-more">
+      Showing 8 of 24 reservations
+      <button>Load More</button>
+    </div>
+  </main>
+
+  <script src="../js/reservationdashboard.js"></script>
+  <script src="../js/access.js"></script>
+</body>
+</html>

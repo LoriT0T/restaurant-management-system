@@ -1,0 +1,125 @@
+﻿body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9fc;
+  margin: 0;
+  color: #333;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.navbar a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+}
+
+.navbar a.active {
+  color: #5b5be7;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.help-btn {
+  background: #eee;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border-radius: 6px;
+}
+
+.profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 2rem;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-order {
+  background-color: #5b5be7;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+}
+
+.search-filter {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.search-filter input {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.filter-btn {
+  padding: 0.6rem 1rem;
+  border: none;
+  background: #eee;
+  border-radius: 8px;
+}
+
+.status-tabs {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.status-tabs .tab {
+  background: #f1f1fb;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.status-tabs .tab.active {
+  background: #5b5be7;
+  color: white;
+}
+
+.order-section {
+  margin-top: 2rem;
+}
+
+.order-list {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.summary-cards {
+  display: flex;
+  gap: 2rem;
+}
+
+.card {
+  flex: 1;
+  background: #f1f1fb;
+  padding: 1.5rem;
+  border-radius: 12px;
+}

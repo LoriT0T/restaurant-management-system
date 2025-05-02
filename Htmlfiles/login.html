@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant Management Login</title>
+  <link rel="stylesheet" href="../css/login.css"/>
+  <style>
+    .role.selected {
+      border: 2px solid #ff9800;
+      background-color: #fff3e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Restaurant Management System</h1>
+
+    <div class="login-box">
+      <h2>Login</h2>
+      <p>Please select your role and enter your credentials to access the system.</p>
+    </div>
+
+    <h3>Select Role</h3>
+    <div class="roles">
+      <div class="role" onclick="selectRole('waiter', this)">
+        <span>🍽️</span>
+        <strong>Waiter</strong>
+        <p>Table service and orders</p>
+      </div>
+      <div class="role" onclick="selectRole('kitchen', this)">
+        <span>👨‍🍳</span>
+        <strong>Kitchen</strong>
+        <p>Food preparation</p>
+      </div>
+      <div class="role" onclick="selectRole('manager', this)">
+        <span>🧑‍💼</span>
+        <strong>Manager</strong>
+        <p>Restaurant operations</p>
+      </div>
+      <div class="role" onclick="selectRole('admin', this)">
+        <span>🛠️</span>
+        <strong>Admin</strong>
+        <p>System administration</p>
+      </div>
+      <div class="role" onclick="selectRole('customer', this)">
+        <span>🫅👸</span>
+        <strong>Customer</strong>
+        <p>Enjoy the food</p>
+      </div>
+    </div>
+
+    <form class="credentials" onsubmit="return handleLogin(event)">
+      <label>Username</label>
+      <input type="text" id="username" placeholder="Enter your username" required />
+
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="forgot"><a href="forgotpassword.html">Forgot password?</a></p>
+  </div>
+
+  <script src="../js/login.js"></script>
+</body>
+</html>

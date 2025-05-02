@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kitchen Dashboard</title>
+  <link rel="stylesheet" href="../css/kitchen.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="reservationdashboard.html">Reservations</a>
+      <a href="reservationdashboard.html">Tables</a>
+      <a href="orders.html">Orders</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="kitchen.html" class="active">Kitchen</a>
+    </div>
+    <div class="nav-right">
+      <button class="help-btn">Help</button>
+      <div class="avatar"></div>
+    </div>
+  </nav>
+
+  <section class="breadcrumbs">
+    Dashboard &gt; <strong>Kitchen</strong>
+  </section>
+
+  <main class="dashboard">
+    <h1>Kitchen Dashboard</h1>
+
+    <div class="tabs">
+      <button class="tab active" onclick="filterOrders('pending')">Pending</button>
+      <button class="tab" onclick="filterOrders('progress')">In Progress</button>
+      <button class="tab" onclick="filterOrders('ready')">Ready</button>
+      <button class="tab" onclick="filterOrders('all')">All Items</button>
+      <button class="refresh">Refresh</button>
+    </div>
+
+    <section class="orders" id="ordersContainer">
+      <!-- Order cards go here -->
+    </section>
+
+    <section class="order-items">
+      <h2>Order Items</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th><th>Dish</th><th>Table</th><th>Special</th><th>Status</th><th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="orderItemsBody">
+          <!-- JS will inject items here -->
+        </tbody>
+      </table>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><p>9</p><span>Pending Items</span></div>
+      <div class="stat"><p>5</p><span>In Progress</span></div>
+      <div class="stat"><p>12</p><span>Completed Today</span></div>
+      <div class="stat"><p>14 min</p><span>Avg Prep Time</span></div>
+    </section>
+  </main>
+
+  <script src="../js/kitchen.js"></script>
+  <script src="../js/access.js"></script>
+</body>
+</html>

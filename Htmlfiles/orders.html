@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orders</title>
+  <link rel="stylesheet" href="../css/orders.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="reservationdashboard.html">Reservations</a>
+      <a href="tables.html">Tables</a>
+      <a href="orders.html" class="active">Orders</a>
+      <a href="kitchen.html">Kitchen</a>
+      <a href="inventory.html">Inventory</a>
+    </div>
+    <div class="nav-right">
+      <button class="help-btn">Help</button>
+      <img src="profile.jpg" alt="Profile" class="profile-icon" />
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="header-row">
+      <h1>Order</h1>
+      <button class="new-order">New Order</button>
+    </div>
+
+    <div class="search-filter">
+      <input type="text" id="search" placeholder="Search orders..." />
+      <button class="filter-btn">Filter</button>
+    </div>
+
+    <div class="status-tabs">
+      <button class="tab active">All Orders</button>
+      <button class="tab">Active</button>
+      <button class="tab">Completed</button>
+      <button class="tab">Cancelled</button>
+    </div>
+
+    <div class="order-section">
+      <h2>Today's Orders</h2>
+      <div id="today-orders" class="order-list"></div>
+
+      <h2>Yesterday's Orders</h2>
+      <div id="yesterday-orders" class="order-list"></div>
+    </div>
+
+    <div class="summary-cards">
+      <div class="card">
+        <h3>Today's Summary</h3>
+        <p id="todays-summary">No orders yet.</p>
+      </div>
+      <div class="card">
+        <h3>Average Order Time</h3>
+        <p id="avg-time">--</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/orders.js"></script>
+  <script src="../js/access.js"></script>
+</body>
+</html>

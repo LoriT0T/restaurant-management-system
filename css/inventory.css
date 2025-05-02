@@ -1,0 +1,154 @@
+﻿body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #333;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 2em;
+  background: white;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.navbar nav a {
+  margin: 0 0.75em;
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.add-item {
+  background: #7b61ff;
+  color: white;
+  border: none;
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 2em;
+}
+
+.breadcrumbs {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 1em;
+}
+
+.tabs a {
+  margin-right: 1em;
+  color: #666;
+  cursor: pointer;
+}
+
+.tabs .active {
+  font-weight: bold;
+  color: black;
+  border-bottom: 2px solid #7b61ff;
+}
+
+.overview {
+  display: flex;
+  gap: 1.5em;
+  margin: 1.5em 0;
+}
+
+.card {
+  background: #f6f4ff;
+  padding: 1.2em;
+  border-radius: 12px;
+  flex: 1;
+}
+
+.card button {
+  margin-top: 0.5em;
+  background: #7b61ff;
+  color: white;
+  border: none;
+  padding: 0.4em 0.8em;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.inventory-controls {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5em 0;
+}
+
+.inventory-controls input {
+  flex: 1;
+  padding: 0.6em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-right: 1em;
+}
+
+.inventory-controls .buttons button {
+  margin-left: 0.5em;
+  padding: 0.6em 1em;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2em;
+}
+
+.inventory-table th, .inventory-table td {
+  text-align: left;
+  padding: 0.75em;
+  border-bottom: 1px solid #eee;
+}
+
+.low {
+  color: #b40000;
+  font-weight: bold;
+}
+
+.activity ul {
+  list-style: none;
+  padding: 0;
+}
+
+.activity ul li {
+  padding: 0.5em 0;
+}
+
+.report-buttons {
+  margin-top: 1em;
+}
+
+.report-buttons button {
+  padding: 0.6em 1.2em;
+  margin-right: 1em;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.report-buttons .primary {
+  background: #7b61ff;
+  color: white;
+}
