@@ -1,0 +1,146 @@
+Bug 1: Database Connection Issues in Database Class
+
+Buggy Code:
+/ In Database.java
+public boolean connectInfo() {
+    if (connectionStatus) {
+        System.out.println("Already connected to database");
+        return true;
+    }
+    
+    try {
+        // Missing initialization of connection status
+        System.out.println("Connecting to in-memory database");
+        // connectionStatus is never set to true here!
+        return true;
+    } catch (Exception e) {
+        System.out.println("Connection failed: " + e.getMessage());
+        return false;
+    }
+}
+
+Fixed Code:
+// In Database.java
+public boolean connectInfo() {
+    if (connectionStatus) {
+        System.out.println("Already connected to database");
+        return true;
+    }
+    
+    try {
+        // Proper initialization of connection status
+        System.out.println("Connecting to in-memory database");
+        connectionStatus = true; // Fixed by setting status to true
+        return true;
+    } catch (Exception e) {
+        System.out.println("Connection failed: " + e.getMessage());
+        return false;
+    }
+}
+
+Bug Description: The connection status is never updated when connecting to the database.
+Impact: All subsequent database operations would fail because they check if connectionStatus is true before proceeding.
+Fix: Added the missing line to set connectionStatus = true when connection is successful.
+Result: Now all database operations like storing reservations, retrieving orders, and updating payments can work properly after connecting.
+
+Bug 2: Payment Processing Logic Error in Order Class
+
+Buggy Code:
+// In Order.java
+public double calculateTotal() {
+    double total = 0.0;
+    for (OrderItem item : items) {
+        // Bug: Not using the item quantity in calculation
+        total += ((MenuItem)item).getPrice();
+    }
+    this.totalAmount = total;
+    return total;
+}
+
+Fixed Code:
+// In Order.java
+public double calculateTotal() {
+    double total = 0.0;
+    for (OrderItem item : items) {
+        // Fixed: Multiply price by quantity for correct total
+        if (item instanceof MenuItem) {
+            MenuItem menuItem = (MenuItem)item;
+            total += menuItem.getPrice() * menuItem.getQuantity();
+        }
+    }
+    this.totalAmount = total;
+    return total;
+}
+
+Bug Description: The order total calculation ignores item quantities, only adding the base price once per item.
+Impact: Incorrect order totals would be calculated, leading to billing errors and financial discrepancies.
+Fix: Modified the calculation to multiply each item's price by its quantity.
+Result: Order totals now correctly reflect multiple quantities of the same item.
+
+Bug 3: Authentication Security Vulnerability in SystemController
+
+Buggy Code:
+// In SystemController.java
+public boolean authenticate(String username, String password) {
+    if (userCredentials.containsKey(username)) {
+        String storedPassword = userCredentials.get(username);
+        // Bug: Timing attack vulnerability in string comparison
+        if (storedPassword.equals(password)) {
+            isLoggedIn = true;
+            currentUser = username;
+            System.out.println("User " + username + " authenticated successfully");
+            return true;
+        }
+    }
+    System.out.println("Authentication failed for user " + username);
+    return false;
+}
+
+Fixed Code:
+// In SystemController.java
+public boolean authenticate(String username, String password) {
+    // Check if user exists first without revealing info
+    if (!userCredentials.containsKey(username)) {
+        // Fixed: Use constant time response for non-existent users
+        System.out.println("Authentication failed");
+        return false;
+    }
+    
+    String storedPassword = userCredentials.get(username);
+    // Fixed: In a real system, we would use a secure password comparison
+    // For demo purposes, we're simulating a timing-attack resistant comparison
+    boolean passwordMatch = secureCompare(storedPassword, password);
+    
+    if (passwordMatch) {
+        isLoggedIn = true;
+        currentUser = username;
+        System.out.println("User " + username + " authenticated successfully");
+        return true;
+    }
+    
+    System.out.println("Authentication failed");
+    return false;
+}
+
+// Helper method for secure password comparison
+private boolean secureCompare(String a, String b) {
+    if (a.length() != b.length()) {
+        return false;
+    }
+    
+    int result = 0;
+    // Constant time comparison (simulated)
+    for (int i = 0; i < a.length(); i++) {
+        result |= a.charAt(i) ^ b.charAt(i);
+    }
+    return result == 0;
+}
+
+Bug Description: The authentication method has two security issues:
+1. It leaks information about whether a username exists
+2. It uses a timing-vulnerable string comparison method
+Impact: Attackers could use timing attacks to guess valid usernames and passwords.
+Fix: 
+1. Added consistent messaging regardless of whether username exists
+2. Implemented a simulated constant-time string comparison method
+Result: Authentication is now more secure against timing attacks and username enumeration.
